@@ -67,6 +67,61 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     // TODO - Make buttons functional
+
+    errorBtns[0].addEventListener('click',()=> {
+      console.log('Hi, I am consold log demo')
+    });
+
+    errorBtns[1].addEventListener('click',()=>{
+      console.err('Hi, I am console error demo')
+    });
+
+    errorBtns[2].addEventListener('click',()=>{
+      console.dir(document)
+    });
+
+    errorBtns[3].addEventListener('click',()=>{
+      console.dirxml(document.querySelector("#calculate"));
+    });
+
+    errorBtns[4].addEventListener('click',()=>{
+      console.group();
+      console.log("1st log first group");
+      console.group();
+      console.log("2nd log first group");
+    });
+
+
+    errorBtns[5].addEventListener('click',()=>{
+      console.log("entering group");
+      console.group();
+      console.log("Hello again, this time inside a group!");
+      console.groupEnd();
+      console.log("and we are back.");
+    });
+
+    errorBtns[6].addEventListener('click',()=>{
+      console.table(["110", "112", "135"]);
+    });
+    
+    errorBtns[7].addEventListener('click',()=>{
+      console.time()
+    });
+
+    errorBtns[8].addEventListener('click',()=>{
+      console.timeEnd()
+    });
+
+    errorBtns[9].addEventListener('click',()=>{
+      const myFunc = () => { myOtherFunc ()};
+      const myOtherFunc = () => {console.trace()};
+      myFunc();
+    });
+
+
+
+
+
   </script>
 </body>
 </html>
