@@ -55,6 +55,15 @@
     <button>Trigger a Global Error</button>
   </section>
 
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "39f1467d2f1f49a083172cab4045475c"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+
   <script>
     let calculateBtn = document.querySelector('#calculate');
     calculateBtn.addEventListener('click', () => {
@@ -73,7 +82,7 @@
     });
 
     errorBtns[1].addEventListener('click',()=>{
-      console.err('Hi, I am console error demo')
+      console.error('Hi, I am console error demo')
     });
 
     errorBtns[2].addEventListener('click',()=>{
@@ -87,12 +96,11 @@
     errorBtns[4].addEventListener('click',()=>{
       console.group();
       console.log("1st log first group");
-      console.group();
-      console.log("2nd log first group");
     });
 
 
     errorBtns[5].addEventListener('click',()=>{
+      console.groupEnd();
       console.log("entering group");
       console.group();
       console.log("Hello again, this time inside a group!");
@@ -103,7 +111,7 @@
     errorBtns[6].addEventListener('click',()=>{
       console.table(["110", "112", "135"]);
     });
-    
+
     errorBtns[7].addEventListener('click',()=>{
       console.time()
     });
@@ -117,11 +125,42 @@
       const myOtherFunc = () => {console.trace()};
       myFunc();
     });
+    
+    
+    class CustomError extends Error {
+      constructor(message) {
+        super(message); // (1)
+        this.name = "CustomError"; // (2)
+      }
+    };
+    
+    function test() {
+      throw new CustomError("Whoops!");
+    };
+    
+    errorBtns[10].addEventListener('click', () => {
+      try {
+        test();
+      } 
+      catch(err) {
+        console.log(err.message); // Whoops!
+        console.log(err.name); // ValidationError
+      }
+      finally {
+        console.log('check your code!');
+      }
+    });
+
+    window.onerror = function (){
+      console.log('ERROR!');
+      TrackJS.track('Testing TrackJS!');
+    };
 
 
 
 
 
   </script>
+                        
 </body>
 </html>
