@@ -138,30 +138,27 @@
     };
     
     function test() {
-      throw new CustomError("Whoops!");
+      throw new CustomError("GLOBAL ERROR!");
     };
-
-    try {
+    
+    errorBtns[10].addEventListener('click', () => {
+      try {
         test();
       } 
       catch(err) {
-        console.log(err.message); // Whoops!
-        console.log(err.name); // ValidationError
+        console.error(err.message); // Whoops!
+        console.error(err.name); // ValidationError
       }
       finally {
         console.log('check your code!');
-    }
-    
-    errorBtns[10].addEventListener('click', () => {
-      window.onerror = function (){
-        console.log('GLOBAL ERROR!');
-        TrackJS.track('Testing TrackJS!');
-      };
+      }
+
+
+    window.onerror = function (){
+      console.log('ERROR!');
+      TrackJS.track('Testing TrackJS!');
+    };
     });
-
-
-
-
 
   </script>
                         
