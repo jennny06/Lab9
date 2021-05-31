@@ -147,8 +147,7 @@
         test();
       } 
       catch(err) {
-        console.log(err.message); // Whoops!
-        console.log(err.name); // ValidationError
+        console.error(err.message); // Whoops!
       }
       finally {
         console.log('check your code!');
