@@ -140,9 +140,8 @@
     function test() {
       throw new CustomError("Whoops!");
     };
-    
-    errorBtns[10].addEventListener('click', () => {
-      try {
+
+    try {
         test();
       } 
       catch(err) {
@@ -151,13 +150,14 @@
       }
       finally {
         console.log('check your code!');
-      }
+    }
+    
+    errorBtns[10].addEventListener('click', () => {
+      window.onerror = function (){
+        console.log('GLOBAL ERROR!');
+        TrackJS.track('Testing TrackJS!');
+      };
     });
-
-    window.onerror = function (){
-      console.log('ERROR!');
-      TrackJS.track('Testing TrackJS!');
-    };
 
 
 
